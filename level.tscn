@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://6ctgri4nfffl"]
+
+[ext_resource type="PackedScene" uid="uid://5weqc056oqwm" path="res://water.tscn" id="1_water"]
+[ext_resource type="Script" uid="uid://3twenigiupue" path="res://rock.gd" id="2_rock"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vonw3"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_oi3di"]
+sky_material = SubResource("ProceduralSkyMaterial_vonw3")
+
+[sub_resource type="Environment" id="Environment_0b4ue"]
+background_mode = 2
+sky = SubResource("Sky_oi3di")
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qmoj4"]
+albedo_color = Color(0.5411765, 0.52156866, 0.47058824, 1)
+roughness = 0.9
+
+[sub_resource type="SphereMesh" id="SphereMesh_x4ob8"]
+radius = 0.3
+height = 0.6
+
+[node name="island" type="Node3D" unique_id=1357514382]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1454169095]
+environment = SubResource("Environment_0b4ue")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2124679586]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="map" type="Node3D" parent="." unique_id=1261205183]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="map" unique_id=567322237]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7128906, 0.8600211, 3.0105896)
+size = Vector3(10.597656, 1, 9.029846)
+
+[node name="water" parent="map" unique_id=109855450 instance=ExtResource("1_water")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13018227, 115.04184)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1578819117]
+transform = Transform3D(-1, 2.262668e-08, -8.444392e-08, 0, 0.9659258, 0.25881904, 8.742278e-08, 0.25881904, -0.9659258, 0, 3.5, -2)
+current = true
+
+[node name="Rock" type="MeshInstance3D" parent="." unique_id=1442557506]
+transform = Transform3D(1, 0, 0, 0, 0.45, 0, 0, 0, 1.3, 0, 1.5, 4)
+material_override = SubResource("StandardMaterial3D_qmoj4")
+mesh = SubResource("SphereMesh_x4ob8")
+script = ExtResource("2_rock")
